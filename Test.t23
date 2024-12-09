@@ -1,0 +1,39 @@
+.include "tn2313def.inc"
+
+.def	Null = r0
+.def	Time = r16
+.def	TimeInd = r17
+.def	TimeDin = r18
+.def	Flags = r19
+.def	Sound = r20
+.def	Loud = r21
+.def	Wq = r22
+.def	Wq1 = r23
+.def	Wq2 = r24
+
+
+
+.dseg
+
+Out0:	.byte 8
+
+
+.cseg
+
+.org 0
+
+	ldi Wq, Low(RamEnd)
+	out spl, Wq
+	ldi Wq, 0xff
+	out ddrb, Wq
+	ldi Wq, 0b11000011
+	out ddrd, Wq
+	ldi Wq, 0b00111101
+	out portd, Wq
+	ldi Wq, 0b00111100
+	out portd, Wq
+
+Begin:	ldi Wq1, 0b01101101
+	out PORTB, Wq1
+	rjmp Begin
+	          					
